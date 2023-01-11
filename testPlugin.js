@@ -24,14 +24,32 @@ const PlayerEventsIds = {
   onFullscreenChange: 9
 }
 
-class NpawPlugin {
-  get timestamp() {
-    return this._timestamp;
-  }
+function testPlugin(options) {
 
-  set timestamp(value) {
-    this._timestamp = value;
-  }
+  let npawPlugin = new NpawPlugin(options.userId, options.contentId)
+
+  this.on(PlayerEvents.onFirstPlay, function() {
+    console.log('FIRST PLAY');
+    npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onFirstPlay);
+  });
+
+  this.on(PlayerEvents.onPlay, function() {
+    console.log('PLAY');
+    npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onPlay);
+  });
+
+  this.on(PlayerEvents.onPause, function() {
+    console.log('PAUSE');
+    npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onPause);
+  });
+
+  this.on(PlayerEvents.onEnded, function() {
+    console.log('ENDED');
+    npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onEnded);
+  });
+}
+
+class NpawPlugin {
 
   constructor(userId, contentId) {
     this.id = crypto.randomUUID();
@@ -41,17 +59,11 @@ class NpawPlugin {
     this.sessionEvents = [];
 
     this.uploadInitialData();
-
-    setInterval(this.uploadSessionData, 5000);
-  }
-
-  newViewingSessionEvent(contentPosition, eventId) {
-    this.sessionEvents.push(new SessionEvent(contentPosition, eventId));
   }
 
   uploadInitialData() {
-    console.log('send initial data');
-    let data = [
+
+    let initialData = [
       this.id,
       this.timestamp,
       this.userId,
@@ -59,9 +71,10 @@ class NpawPlugin {
     ];
 
     if (1 === 0) {
+      // TODO: Handle authorization
       fetch('https://api.example.com/view-session', {
         method: 'POST',
-        body: JSON.parse(JSON.stringify(data)),
+        body: JSON.parse(JSON.stringify(initialData)),
         headers: {
           'Content-type': 'application/json'
         }
@@ -71,13 +84,16 @@ class NpawPlugin {
         }
       });
     }
+
+    console.log('Initial data sent');
   }
 
-  uploadSessionData() {
-    console.log('send data');
+  newViewingSessionEvent(contentPosition, eventId) {
+    this.sessionEvents.push(new SessionEvent(contentPosition, eventId));
 
     if (1 === 0 && this.sessionEvents !== []) {
-      fetch('https://api.example.com/view-session/' + this.id, {
+      // TODO: Handle authorization
+      fetch('https://api.example.com/view-session/' + this.id + '/events', {
         method: 'POST',
         body: JSON.parse(JSON.stringify(this.sessionEvents)),
         headers: {
@@ -86,9 +102,14 @@ class NpawPlugin {
       }).then(response => {
         if (response.ok) {
           this.sessionEvents = [];
+        } else {
+          // TODO: Handle error
         }
       });
     }
+
+    console.log('Session data sent');
+    console.log(this.sessionEvents);
   }
 }
 

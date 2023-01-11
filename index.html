@@ -3,23 +3,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/img/npaw-icon.png">
     <title>NPAW | Video.js Plugin</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="mx-auto max-w-screen-xl px-4 bg-red-700 flex mx-auto py-4">
+  <body class="bg-black">
+    <div class="mx-auto max-w-screen-xl h-full my-auto px-4 flex py-4">
       <video id="player"
              class="video-js vjs-default-skin"
              width="1280"
              height="531"
              controls
              preload="auto"
-             poster="really-cool-video-poster.jpg"
+             poster="/img/video-poster.png"
              data-setup='{}'>
-        <source src="video.mp4">
-        <!-- <source src="http://cdn.s1.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'> -->
-        <!-- <source src="http://cdn.s2.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'> -->
+        <source src="http://cdn.s1.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>
+        <source src="http://cdn.s2.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>
         <p class="vjs-no-js">
           To view this video please enable JavaScript, and consider upgrading to a web browser
           that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -29,7 +29,7 @@
 
     <link href="https://vjs.zencdn.net/4.12.15/video-js.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/4.12.15/video.js"></script>
-    <script src="plugin.js"></script>
+    <script src="testPlugin.js"></script>
     <script src="player.js"></script>
   </body>
 </html>
