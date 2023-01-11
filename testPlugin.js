@@ -24,6 +24,13 @@ const PlayerEventsIds = {
   onFullscreenChange: 9
 }
 
+const PlayerEventsUi = {
+  4: 'Ended',
+  5: 'Playing',
+  6: 'Playing',
+  7: 'Paused',
+}
+
 function testPlugin(options) {
 
   let npawPlugin = new NpawPlugin(options.userId, options.contentId)
@@ -52,6 +59,8 @@ function testPlugin(options) {
 class NpawPlugin {
 
   constructor(userId, contentId) {
+    this.ui = new PluginUi();
+
     this.id = crypto.randomUUID();
     this.timestamp = Date.now();
     this.userId = userId;
@@ -108,6 +117,7 @@ class NpawPlugin {
       });
     }
 
+    this.ui.newEvent(eventId);
     console.log('Session data sent');
     console.log(this.sessionEvents);
   }
@@ -119,4 +129,23 @@ class SessionEvent {
     this.eventId = eventId;
     this.timestamp = Date.now();
   }
+}
+
+class PluginUi {
+
+  newEvent(eventId) {
+    let uiText = PlayerEventsUi[eventId];
+    this.updateStateText(uiText);
+    this.addEventItem(uiText);
+  }
+
+  updateStateText(uiText) {
+    document.querySelector('#state-placeholder').innerHTML = uiText;
+  }
+
+  addEventItem(uiText) {
+    document.getElementById('events-list-placeholders').innerHTML += '<li class="mt-2 p-5 bg-blue-500 rounded">' + uiText + '</li>';
+  }
+
+
 }

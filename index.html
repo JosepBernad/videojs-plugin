@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-black">
-    <div class="mx-auto max-w-screen-xl h-full my-auto px-4 flex py-4">
+  <body class="bg-black text-gray-200">
+    <div class="mx-auto max-w-screen-xl px-4 py-4">
       <video id="player"
              class="video-js vjs-default-skin vjs-big-play-centered"
              width="1280"
@@ -25,6 +25,18 @@
           that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
         </p>
       </video>
+      <div class="p-5">
+        Current state:
+        <div id="state-placeholder" class="mt-2 p-5 bg-blue-500 rounded">
+          Ready
+        </div>
+      </div>
+      <div class="p-5">
+        Events List:
+        <ul id="events-list-placeholder">
+
+        </ul>
+      </div>
     </div>
 
     <link href="https://vjs.zencdn.net/4.12.15/video-js.css" rel="stylesheet">
