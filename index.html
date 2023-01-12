@@ -9,33 +9,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-black text-gray-200">
-    <div class="mx-auto max-w-screen-xl px-4 py-4">
-      <video id="player"
-             class="video-js vjs-default-skin vjs-big-play-centered"
-             width="1280"
-             height="531"
-             controls
-             preload="auto"
-             poster="/img/video-poster.png"
-             data-setup='{}'>
-        <source src="http://cdn.s1.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>
-        <source src="http://cdn.s2.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>
-        <p class="vjs-no-js">
-          To view this video please enable JavaScript, and consider upgrading to a web browser
-          that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-        </p>
-      </video>
-      <div class="p-5">
-        Current state:
-        <div id="state-placeholder" class="mt-2 p-5 bg-blue-500 rounded">
-          Ready
-        </div>
+    <div class="mx-auto p-4">
+      <div class="mx-auto">
+        <video id="player"
+               class="video-js vjs-default-skin vjs-big-play-centered"
+               width="1280"
+               height="531"
+               controls
+               preload="auto"
+               poster="/img/video-poster.png"
+               data-setup='{}'>
+          <source src="/sintel.mp4" type='video/mp4'>
+          <!--        <source src="http://cdn.s1.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>-->
+          <!--        <source src="http://cdn.s2.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>-->
+          <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a web browser
+            that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+          </p>
+        </video>
       </div>
-      <div class="p-5">
-        Events List:
-        <ul id="events-list-placeholder">
+      <div>
+        <div class="p-5">
+          <div id="state-placeholder">
+            <div class="mt-2 p-5 bg-purple-500 font-extrabold text-2xl rounded">
+<!--              <span class="font-light text-md">State</span> </br>-->
+              Ready
+            </div>
+          </div>
+        </div>
+        <div class="p-5 flex flex-row">
+          <div class="w-1/2 pr-5">
+            Events List:
+            <ul id="events-list-placeholder">
+            </ul>
+          </div>
+<!--          <div class="w-1/2 pl-5">-->
+<!--            Stats:-->
+<!--            <ul id="stats-list-placeholder">-->
 
-        </ul>
+<!--            </ul>-->
+          </div>
+        </div>
       </div>
     </div>
 
