@@ -1,3 +1,4 @@
+// TODO: Improve player responsiveness.
 let playerWidth = Math.ceil(window.screen.width * 0.6);
 
 let playerHtml = '' +
@@ -7,8 +8,8 @@ let playerHtml = '' +
   '       height="' + 531 + '"' +
   '       controls' +
   '       preload="auto"' +
-  '       poster="/img/video-poster.png"' +
-  '       data-setup=\'{}\'>' +
+  '       poster=' +
+  '"/img/video-poster.png"       data-setup=\'{}\'>' +
   '  <source src="/sintel.mp4" type=\'video/mp4\'>' +
   '<!-- <source src="http://cdn.s1.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type=\'video/mp4\'>-->' +
   '<!-- <source src="http://cdn.s2.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type=\'video/mp4\'>-->' +
@@ -23,11 +24,11 @@ document.querySelector('#player-placeholder').innerHTML = playerHtml;
 const TEST_USER_ID = 1234;
 const TEST_CONTENT_ID = 5678;
 
-videojs.plugin('testPlugin', testPlugin);
+videojs.plugin('plugin', plugin);
 
 let player = videojs('player');
 
-player.testPlugin({
+player.plugin({
   userId: TEST_USER_ID,
   contentId: TEST_CONTENT_ID
 });
