@@ -27,22 +27,18 @@ function plugin(options) {
   let npawPlugin = new NpawPlugin(options.userId, options.contentId)
 
   this.on(PlayerEvents.onFirstPlay, function() {
-    console.log('FIRST PLAY');
     npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onFirstPlay);
   });
 
   this.on(PlayerEvents.onPlay, function() {
-    console.log('PLAY');
     npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onPlay);
   });
 
   this.on(PlayerEvents.onPause, function() {
-    console.log('PAUSE');
     npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onPause);
   });
 
   this.on(PlayerEvents.onEnded, function() {
-    console.log('ENDED');
     npawPlugin.newViewingSessionEvent(this.currentTime(), PlayerEventsIds.onEnded);
   });
 }
@@ -50,6 +46,7 @@ function plugin(options) {
 class NpawPlugin {
 
   constructor(userId, contentId) {
+    this.server = new Server();
     this.events = new Events();
     this.analytics = new Analytics();
 
@@ -71,22 +68,7 @@ class NpawPlugin {
       this.contentId,
     ];
 
-    if (1 === 0) {
-      // TODO: Handle authorization
-      fetch('https://api.example.com/view-session', {
-        method: 'POST',
-        body: JSON.parse(JSON.stringify(initialData)),
-        headers: {
-          'Content-type': 'application/json'
-        }
-      }).then(response => {
-        if (!response.ok) {
-          // TODO: Handle error
-        }
-      });
-    }
-
-    console.log('Initial data sent');
+    this.server.sendInitialData(initialData);
   }
 
   newViewingSessionEvent(contentPosition, eventId) {
@@ -99,26 +81,9 @@ class NpawPlugin {
 
     this.sessionEvents.push(sessionEvent);
 
+    this.server.sendSessionEvent(this.id, sessionEvent);
     this.analytics.newSessionEvent(sessionEvent);
     this.events.newSessionEvent(sessionEvent);
-
-    if (1 === 0 && this.sessionEvents !== []) {
-      // TODO: Handle authorization
-      fetch('https://api.example.com/view-session/' + this.id + '/events', {
-        method: 'POST',
-        body: JSON.parse(JSON.stringify(this.sessionEvents)),
-        headers: {
-          'Content-type': 'application/json'
-        }
-      }).then(response => {
-        if (response.ok) {
-          this.sessionEvents = [];
-          console.log('Session data sent');
-        } else {
-          // TODO: Handle error
-        }
-      });
-    }
   }
 }
 
