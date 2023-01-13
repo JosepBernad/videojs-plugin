@@ -5,9 +5,10 @@ class Analytics {
 
     this.numPlays = 0;
     this.numPauses = 0;
-
-    this.timePlaying = 0;
-    this.timePaused = 0;
+    this.currentTimePlaying = 0;
+    this.currentTimePaused = 0;
+    this.totalTimePlaying = 0;
+    this.totalTimePaused = 0;
 
     this.setupTimer();
   }
@@ -31,11 +32,11 @@ class Analytics {
   setupTimer() {
     setInterval(function() {
       if (this.numPlays > this.numPauses) {
-        ++this.timePlaying;
-        document.querySelector("#time-playing-placeholder").innerHTML = this.formatTime(this.timePlaying);
+        ++this.totalTimePlaying;
+        document.querySelector("#time-playing-placeholder").innerHTML = this.formatTime(this.totalTimePlaying);
       } else if (this.numPlays !== 0) {
-        ++this.timePaused;
-        document.querySelector("#time-paused-placeholder").innerHTML = this.formatTime(this.timePaused);
+        ++this.totalTimePaused;
+        document.querySelector("#time-paused-placeholder").innerHTML = this.formatTime(this.totalTimePaused);
       }
 
     }.bind(this), 1000);

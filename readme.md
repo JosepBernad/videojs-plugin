@@ -4,7 +4,8 @@ This is my resolution of the NPAW's challenge to create a plugin to get the play
 
 > ### Table of contents
 > 1. [Requirements and restrictions](#requirements)
-> 2. [Philosophy](#philosophy)
+> 2. [Philosophy and architecture](#philosophy)
+> 3. [Improvements and known issues](#improvements)
 
 ## 1. Requirements and restrictions <div id='requirements'/>
 
@@ -64,6 +65,30 @@ All the events gathered are sent to three different actors:
 - `Events` class: to show on the UI the current state and a list of all the event during the viewing session.
 - `Analytics` class: to also show on the UI all the stats from the current viewing session.
 
+> Note the `Server` methods have a `if (1 = 0)` statement to avoid  
 
+## 3. Improvements and known issues <div id='improvements'/>
 
+### 3.1. Partial play/stop times
 
+On the server side it would be easy to calculate the duration of each state.
+It would be something like:
+
+```js
+let currentEvent = eventsList.at(-1);
+let previousEvent = eventsList.at(-2);
+
+let previousEventDuration = currentEvent.timestamp - previousEvent.timestamp;
+```
+
+In my opinion it's easier this to be handled by the server because it has all the information it needs and no clients
+resources would be used.
+
+### 3.2. Responsiveness of the website
+
+This website has been created using a 13inch MacBook and the Ui has been optimized for rather large screens.
+
+### 3.3. Random load errors
+
+Once in a while, the player reports an error due to the cdn. The immediate fix is to refresh the page until it loads
+properly.
