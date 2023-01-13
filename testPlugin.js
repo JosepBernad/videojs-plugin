@@ -148,14 +148,14 @@ class NpawPluginUi {
     let eventPosition = this.getEventPosition(sessionEvent.position);
 
     // Current state
-    let playerState = '<div class="mt-2 p-5 ' + eventColor + ' rounded">' +
+    let playerState = '<div class="px-5 py-4 ' + eventColor + ' rounded-lg">' +
       '                  <span class="font-light text-xs">State</span> <br/>' +
       '                  <h1 class="font-extrabold text-3xl ">' + eventText + '</h1>' +
       '                </div>'
     document.querySelector('#state-placeholder').innerHTML = playerState;
 
     // Event list
-    let eventItem = '<li class="mt-2 px-5 py-2 ' + eventColor + '/50 rounded flex flex-row place-content-between">\n' +
+    let eventItem = '<li class="mt-2 px-5 py-3 ' + eventColor + '/50 rounded flex flex-row place-content-between">\n' +
       '              <div>\n' +
       '                <div class="font-bold text-xl">' + eventText + '</div>' +
       '                <div class="text-white/40">' + eventDate + '</div>' +
