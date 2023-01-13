@@ -92,3 +92,12 @@ This website has been created using a 13inch MacBook and the Ui has been optimiz
 
 Once in a while, the player reports an error due to the cdn. The immediate fix is to refresh the page until it loads
 properly.
+
+### 3.4. Use of Tailwind's cdn dependency
+
+The HTML line
+```html
+<script src="https://cdn.tailwindcss.com"></script>
+```
+is not recommended for production projects, it should be used NPM or other dependency managers.
+
