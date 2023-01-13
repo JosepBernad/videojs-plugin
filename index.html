@@ -11,39 +11,57 @@
   <body class="bg-gray-800 text-gray-200">
       <div class="h-full flex flex-col place-content-center">
         <div class="p-4 flex flex-row place-content-center">
-          <div id="player-placeholder" class="rounded-lg overflow-hidden"></div>
-          <div class="w-4/12 px-3 pb-0">
+          <section class="rounded-lg overflow-hidden">
+            <video id="player"
+                   class="video-js vjs-default-skin vjs-big-play-centered"
+                   width="950"
+                   height="531"
+                   controls
+                   preload="auto"
+                   poster="/img/video-poster.png"
+                   data-setup='{}'>
+              <source src="http://cdn.s1.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>
+              <source src="http://cdn.s2.eu.nice264.com/converted_work6/0082c06e504b0a422bf1_6815f2deeb179c29748af42f8cd5ce95.mp4" type='video/mp4'>
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser
+                that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+              </p>
+            </video>
+          </section>
+          <section class="w-4/12 px-3 pb-0">
             <div id="state-placeholder" class="shadow-xl"></div>
-            <div class="w-full bg-gray-700 p-3 mt-3 rounded-lg shadow-xl">
+            <div class="w-full bg-gray-700 p-3 mt-3 mr-5 rounded-lg shadow-xl">
                 <nav class="flex flex-row justify-center">
-                  <button class="text-lg font-semibold w-32 py-1 bg-gray-600 rounded-l">Events</button>
-                  <button class="text-lg font-semibold w-32 py-1 bg-gray-400/70 rounded-r">Analytics</button>
+                  <button id="nav-events" onclick="Events.showEventsUi()" class="text-lg font-semibold w-32 py-1 bg-gray-400/70 rounded-l">Events</button>
+                  <button id="nav-analytics" onclick="Analytics.showAnalyticsUi()" class="text-lg font-semibold w-32 py-1 bg-gray-600 rounded-r">Analytics</button>
                 </nav>
-                <div class="h-[345px]">
-                  <ul id="events-list-placeholder" class="h-full overflow-y-scroll flex flex-col-reverse hidden"></ul>
-                  <div class="mt-7">
-                    <div class="flex flex-row">
-                      <div class="w-1/2 p-3">
+                <div class="h-[350px] mt-6">
+                  <div id="events-section-placeholder">
+                    <ul id="events-list-placeholder" class="h-full overflow-y-scroll"></ul>
+                  </div>
+                  <div id="analytics-section-placeholder" class="mr-5 hidden">
+                    <div class="flex flex-row pr-0">
+                      <div class="w-1/2 pt-0 p-3 pr-0">
                         <div class="w-full px-5 py-2 bg-gray-600 rounded-lg">
                           <span class="font-light text-xs">Plays</span> <br/>
                           <h1 id="n-plays-placeholder" class="font-bold text-2xl ">46</h1>
                         </div>
                       </div>
-                      <div class="w-1/2 p-3">
+                      <div class="w-1/2 pt-0 p-3 pr-0">
                         <div class="px-5 py-2 bg-gray-600 rounded-lg">
                           <span class="font-light text-xs">Time playing</span> <br/>
                           <h1 id="time-playing-placeholder" class="font-bold text-2xl ">00:00</h1>
                         </div>
                       </div>
                     </div>
-                    <div class="flex flex-row">
-                      <div class="w-1/2 p-3">
+                    <div class="flex flex-row pr-0">
+                      <div class="w-1/2 p-3 pr-0">
                         <div class="px-5 py-2 bg-gray-600 rounded-lg">
                           <span class="font-light text-xs">Pauses</span> <br/>
                           <h1 id="n-pauses-placeholder" class="font-bold text-2xl ">0</h1>
                         </div>
                       </div>
-                      <div class="w-1/2 p-3">
+                      <div class="w-1/2 p-3 pr-0">
                         <div class="px-5 py-2 bg-gray-600 rounded-lg">
                           <span class="font-light text-xs">Time paused</span> <br/>
                           <h1 id="time-paused-placeholder" class="font-bold text-2xl ">00:00</h1>
@@ -53,7 +71,7 @@
                   </div>
                 </div>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     <link href="https://vjs.zencdn.net/4.12.15/video-js.css" rel="stylesheet">

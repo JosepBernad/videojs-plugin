@@ -67,4 +67,14 @@ class Analytics {
 
     return positionValuesFormatted.join(':');
   }
+
+  static showAnalyticsUi() {
+    document.querySelector('#events-section-placeholder').classList.add("hidden");
+    document.querySelector('#analytics-section-placeholder').classList.remove("hidden");
+
+    document.querySelector('#nav-events').classList.add("bg-gray-600");
+    document.querySelector('#nav-events').classList.remove("bg-gray-400/70");
+    document.querySelector('#nav-analytics').classList.add("bg-gray-400/70");
+    document.querySelector('#nav-analytics').classList.remove("bg-gray-600");
+  }
 }

@@ -26,7 +26,7 @@ class Events {
 
     // Event list
     let eventItem = '' +
-      '<li class="mt-2 px-5 pys-3 ' + eventColor + '/50 rounded flex flex-row place-content-between">\n' +
+      '<li class="mx-3 mb-2 px-5 py-1 ' + eventColor + '/50 rounded flex flex-row place-content-between mr-5">\n' +
       '  <div>\n' +
       '    <div class="font-bold text-xl">' + eventText + '</div>' +
       '    <div class="text-white/40">' + eventDate + '</div>' +
@@ -35,7 +35,10 @@ class Events {
            eventPosition +
       '  </div>' +
       '</li>';
-    document.querySelector('#events-list-placeholder').innerHTML += eventItem;
+
+    let eventsList = document.querySelector('#events-list-placeholder');
+    eventsList.innerHTML += eventItem;
+    eventsList.scrollTo(0, eventsList.scrollHeight);
   }
 
   getEventColor(eventId) {
@@ -92,4 +95,13 @@ class Events {
     return positionValuesFormatted.join(':');
   }
 
+  static showEventsUi() {
+    document.querySelector('#events-section-placeholder').classList.remove("hidden");
+    document.querySelector('#analytics-section-placeholder').classList.add("hidden");
+
+    document.querySelector('#nav-events').classList.remove("bg-gray-600");
+    document.querySelector('#nav-events').classList.add("bg-gray-400/70");
+    document.querySelector('#nav-analytics').classList.remove("bg-gray-400/70");
+    document.querySelector('#nav-analytics').classList.add("bg-gray-600");
+  }
 }
