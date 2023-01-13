@@ -21,13 +21,13 @@ This is my resolution of the NPAW's challenge to create a plugin to get the play
   - Video is finished.
 
 ### 1.2. Technical requirements and restrictions
-- Use Video.js v4.12 **<-- I used [v4.12.15](https://github.com/videojs/video.js/releases/tag/v4.12.15)**
+- Use Video.js v4.12 **([v4.12.15](https://github.com/videojs/video.js/releases/tag/v4.12.15))**
 - *NOT* use javascript frameworks
-- Use of css frameworks **<-- I used [Tailwind.css](https://tailwindcss.com)**
+- Use of css frameworks **([Tailwind.css](https://tailwindcss.com))**
 
 
 ## 2. Philosophy and architecture <div id='philosophy'/>
-Thanks to my knowledge of another media player ([howler.js](https://howlerjs.com/)) in previous projects I was already
+Thanks to my knowledge of another media player ([howler.js](https://howlerjs.com/)) used in previous projects I was already
 familiar with the usage of the standard callbacks of a media player (`onPlay`, `onPause`, `onEnded`, etc.), so part of
 the research and investigation was already done. I focused on the architecture of the solution to be as close as
 possible from a real user analytics plugin. Given the strict requirement of the Video.js version, the plugin had to be
@@ -65,7 +65,7 @@ All the events gathered are sent to three different actors:
 - `Events` class: to show on the UI the current state and a list of all the event during the viewing session.
 - `Analytics` class: to also show on the UI all the stats from the current viewing session.
 
-> Note the `Server` methods have a `if (1 = 0)` statement to avoid  
+> Note the `Server` methods have a `if (1 = 0)` statement to avoid running through it's code.
 
 ## 3. Improvements and known issues <div id='improvements'/>
 
