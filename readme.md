@@ -101,3 +101,11 @@ The HTML line
 ```
 is not recommended for production projects, it should be used NPM or other dependency managers.
 
+### 3.5. Lack of unit tests
+
+A variety test could be built to make sure that all the functionalities keeps working after further development.
+
+### 3.6. User moving through the timeline
+
+Every time the user changes the playback position on the timeline, the plugin gets a pause and a play.
+The desired behaviour should avoid that because there's no real pause state.
