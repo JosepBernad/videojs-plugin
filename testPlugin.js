@@ -1,22 +1,25 @@
 const PlayerEvents = {
-  onEnded: 'ended',
-  onPlay: 'play',
+  onReady: 'ready',
   onFirstPlay: 'firstplay',
-  onPause: 'pause'
+  onPause: 'pause',
+  onPlay: 'play',
+  onEnded: 'ended'
 }
 
 const PlayerEventsIds = {
-  onEnded: 4,
-  onPlay: 5,
-  onFirstPlay: 6,
-  onPause: 7
+  onReady: 0,
+  onFirstPlay: 1,
+  onPause: 2,
+  onPlay: 3,
+  onEnded: 4
 }
 
 const PlayerEventsUi = {
-  4: 'Ended',
-  5: 'Playing',
-  6: 'Initial Play',
-  7: 'Paused',
+  0: 'Ready',
+  1: 'Initial Play',
+  2: 'Paused',
+  3: 'Playing',
+  4: 'Ended'
 }
 
 function testPlugin(options) {
@@ -56,6 +59,7 @@ class NpawPlugin {
     this.sessionEvents = [];
 
     this.uploadInitialData();
+    this.newViewingSessionEvent(0, PlayerEventsIds.onReady);
   }
 
   uploadInitialData() {
@@ -86,7 +90,7 @@ class NpawPlugin {
   }
 
   newViewingSessionEvent(contentPosition, eventId) {
-    if (eventId === PlayerEventsIds.onPlay && this.sessionEvents.length === 1) {
+    if (eventId === PlayerEventsIds.onPlay && this.sessionEvents.length === 2) {
       // Avoid the redundant play event after the firstPlay
       return;
     }
@@ -144,41 +148,40 @@ class NpawPluginUi {
     let eventPosition = this.getEventPosition(sessionEvent.position);
 
     // Current state
-    let eventState = '<div class="mt-2 p-5 ' + eventColor + ' font-extrabold text-2xl rounded">' + eventText + '</div>'
-    document.querySelector('#state-placeholder').innerHTML = eventState;
+    let playerState = '<div class="mt-2 p-5 ' + eventColor + ' rounded">' +
+      '                  <span class="font-light text-xs">State</span> <br/>' +
+      '                  <h1 class="font-extrabold text-3xl ">' + eventText + '</h1>' +
+      '                </div>'
+    document.querySelector('#state-placeholder').innerHTML = playerState;
 
     // Event list
     let eventItem = '<li class="mt-2 px-5 py-2 ' + eventColor + '/50 rounded flex flex-row place-content-between">\n' +
       '              <div>\n' +
-      '                <div class="font-bold text-xl">' + eventText + '</div>\n' +
-      '                <div class="text-white/50">' + eventDate + '</div>\n' +
-      '              </div>\n' +
-      '              <div class="my-auto bg-white/30 py-1 px-2 rounded">\n' +
+      '                <div class="font-bold text-xl">' + eventText + '</div>' +
+      '                <div class="text-white/40">' + eventDate + '</div>' +
+      '              </div>' +
+      '              <div class="my-auto bg-white/30 py-1 px-2 rounded">' +
                        eventPosition +
-      '              </div>\n' +
+      '              </div>' +
       '            </li>';
     document.querySelector('#events-list-placeholder').innerHTML += eventItem;
   }
 
   getEventColor(eventId) {
-    let bgColor = 'bg-blue-500';
-
     switch (eventId) {
+      case PlayerEventsIds.onReady:
+        return 'bg-purple-700';
       case PlayerEventsIds.onFirstPlay:
-        bgColor = 'bg-blue-700';
-        break;
+        return 'bg-blue-700';
       case PlayerEventsIds.onPlay:
-        bgColor = 'bg-green-700';
-        break;
+        return 'bg-green-700';
       case PlayerEventsIds.onPause:
-        bgColor = 'bg-yellow-700';
-        break;
+        return 'bg-yellow-700';
       case PlayerEventsIds.onEnded:
-        bgColor = 'bg-red-700';
-        break;
+        return 'bg-red-700';
+      default:
+        return 'bg-gray-700';
     }
-
-    return bgColor;
   }
 
   getEventDate(timestamp) {
