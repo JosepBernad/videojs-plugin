@@ -2,6 +2,7 @@ class Events {
 
   constructor() {
     this.sessionEvents = [];
+    this.previousEventHtml = '';
   }
 
   newSessionEvent(sessionEvent) {
@@ -24,21 +25,20 @@ class Events {
       '</div>'
     document.querySelector('#state-placeholder').innerHTML = playerState;
 
+    let eventsList = document.querySelector('#events-list-placeholder');
+    eventsList.innerHTML = this.previousEventHtml + eventsList.innerHTML;
+
     // Event list
-    let eventItem = '' +
-      '<li class="mx-3 mb-2 px-5 py-1 ' + eventColor + '/50 rounded flex flex-row place-content-between mr-5">\n' +
+    this.previousEventHtml = '' +
+      '<li class="mb-2 px-5 py-1 ' + eventColor + '/50 rounded flex flex-row place-content-between mr-5">\n' +
       '  <div>\n' +
       '    <div class="font-bold text-xl">' + eventText + '</div>' +
       '    <div class="text-white/40">' + eventDate + '</div>' +
       '  </div>' +
       '  <div class="my-auto bg-white/30 py-1 px-2 rounded">' +
-           eventPosition +
+      eventPosition +
       '  </div>' +
       '</li>';
-
-    let eventsList = document.querySelector('#events-list-placeholder');
-    eventsList.innerHTML += eventItem;
-    eventsList.scrollTo(0, eventsList.scrollHeight);
   }
 
   getEventColor(eventId) {
